@@ -10,26 +10,30 @@ def part_one():
         for line in lines:
             section = line.split(",")
 
-            section1 = section[0].split("-")
-            section2 = section[1].split("-")
+            s1 = [int(x) for x in section[0].split("-")]
+            s2 = [int(x) for x in section[1].split("-")]
 
-            # TODO: Work on solution later... Sleepy ZZzzzZZ
-
-            # section1 is subgroup
-            if (section1[0] >= section2[0]) and (section1[1] <= section2[1]):
+            if (s1[0] <= s2[0]) and (s2[1] <= s1[1]) or (s2[0] <= s1[0]) and (s1[1] <= s2[1]):
                 sub_count += 1
-                print(section, "2 is subgroup")
-
-            # section2 is subgroup
-            if (section1[0] <= section2[0]) and (section1[1] >= section2[1]):
-                sub_count += 1
-                print(section, "1 is subgroup")
 
         print(sub_count)
 
 
 def part_two():
-    pass
+    with open(input_file, "r") as f:
+        lines = f.read().splitlines()
+        sub_count = 0
+        for line in lines:
+            section = line.split(",")
+
+            s1 = [int(x) for x in section[0].split("-")]
+            s2 = [int(x) for x in section[1].split("-")]
+
+            if not (s1[1] < s2[0] or s2[1] < s1[0]):
+                sub_count += 1
+
+        print(sub_count)
 
 
 part_one()
+part_two()
